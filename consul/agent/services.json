@@ -1,0 +1,14 @@
+{
+    "services": [
+        {
+            "name": "demo-group",
+            "checks": [
+                {
+                    "args": ["/etc/consul/scripts/hello-world.sh"],
+                    "interval": "5s",
+                    "timeout": "10s"
+                }
+            ]
+        }
+    ]
+}

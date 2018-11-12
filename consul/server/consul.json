@@ -1,0 +1,18 @@
+{
+    "bootstrap_expect": 1,
+    "client_addr": "0.0.0.0",
+    "datacenter": "aws",
+    "data_dir": "/var/consul",
+    "domain": "consul",
+    "dns_config": {
+        "enable_truncate": true,
+        "only_passing": true,
+        "service_ttl": {
+           "*": "1s"
+        }
+     },
+     "leave_on_terminate": true,
+     "rejoin_after_leave": true,
+     "server": true,
+     "ui_dir": "/usr/local/share/consul/ui"
+}

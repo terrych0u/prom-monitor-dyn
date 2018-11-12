@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  cadvisor:
+    image: google/cadvisor:v0.31.0
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      #- /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
+    network_mode: host
+    restart: unless-stopped
+
+  node-exporter:
+    image: prom/node-exporter
+    container_name: node-exporter
+    network_mode: host
+    restart: always
+
+  consul1: 
+    image: consul
+    container_name: consul
+    network_mode: host
+    volumes:
+      - ./consul/agent/:/etc/consul/
+    command: "agent -config-dir /etc/consul/ -bind='{{ GetInterfaceIP \"eth0\" }}'"

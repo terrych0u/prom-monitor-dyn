@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+    network_mode: host
+    restart: always
+
+  node-exporter:
+    image: prom/node-exporter
+    container_name: node-exporter
+    network_mode: host
+    restart: always
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    network_mode: host
+    restart: always
+
+  consul1: 
+    image: consul
+    container_name: consul-server
+    network_mode: host
+    volumes:
+      - ./consul/server/:/etc/consul/
+      - ./consul/ui/:/usr/local/share/consul/ui/
+    command: "agent -config-dir /etc/consul/ -bind='{{ GetInterfaceIP \"eth0\" }}'"
